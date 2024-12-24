@@ -33,7 +33,7 @@ onValue(shoppingListInDB, (snapshot) => {
     clearShoppingListEl();
 
     for (let i = 0; i < itemsArray.length; i++) {
-      let currentItem = itemsArray[i];
+      const currentItem = itemsArray[i];
       appendItemToShoppingListEl(currentItem);
     }
   } else {
@@ -50,15 +50,15 @@ function clearInputFieldEl() {
 }
 
 function appendItemToShoppingListEl(item) {
-  let itemID = item[0];
-  let itemValue = item[1];
+  const itemID = item[0];
+  const itemValue = item[1];
 
-  let newEl = document.createElement("li");
+  const newEl = document.createElement("li");
 
   newEl.textContent = itemValue;
 
   newEl.addEventListener("click", () => {
-    let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`);
+    const exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`);
     remove(exactLocationOfItemInDB);
   });
 

@@ -20,15 +20,13 @@ const inputFieldEl = document.getElementById("input-field");
 const addButtonEl = document.getElementById("add-button");
 const shoppingListEl = document.getElementById("shopping-list");
 
-addButtonEl.addEventListener("click", function () {
-  let inputValue = inputFieldEl.value;
-
-  push(shoppingListInDB, inputValue);
-
-  clearInputFieldEl();
+addButtonEl.addEventListener("click", () => {
+    let inputValue = inputFieldEl.value;
+    push(shoppingListInDB, inputValue);
+    clearInputFieldEl();
 });
 
-onValue(shoppingListInDB, function (snapshot) {
+onValue(shoppingListInDB, (snapshot) => {
   if (snapshot.exists()) {
     let itemsArray = Object.entries(snapshot.val());
 
@@ -36,7 +34,6 @@ onValue(shoppingListInDB, function (snapshot) {
 
     for (let i = 0; i < itemsArray.length; i++) {
       let currentItem = itemsArray[i];
-
       appendItemToShoppingListEl(currentItem);
     }
   } else {
@@ -60,9 +57,8 @@ function appendItemToShoppingListEl(item) {
 
   newEl.textContent = itemValue;
 
-  newEl.addEventListener("click", function () {
+  newEl.addEventListener("click", () => {
     let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`);
-
     remove(exactLocationOfItemInDB);
   });
 
